@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html lang="vi" class="h-full bg-[#F7F4EE]">
+<html lang="vi" class="h-full bg-amber-50">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KŌVA KOMBUCHA - Vòng Quay May Mắn</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- QRCode.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   
   <!-- Canvas Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <!-- QRCode.js library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
 
   <script>
     tailwind.config = {
@@ -26,20 +28,18 @@
         extend: {
           colors: {
             kova: {
-              cream: '#F7F4EE',
-              card: '#FCFAF6',
-              purple: '#5B2C52',
-              purpleLight: '#804875',
-              olive: '#4D6343',
-              oliveLight: '#718C65',
-              tan: '#D2C3B0',
-              gold: '#C59B27',
-              text: '#2C2723'
+              green: '#1E3A2B',
+              olive: '#2D5A3F',
+              gold: '#D4AF37',
+              accent: '#E6A15C',
+              cream: '#FAFAFA',
+              card: '#F4EFEA',
+              rust: '#C85A32'
             }
           },
           fontFamily: {
-            serif: ['"Playfair Display"', 'serif'],
-            sans: ['"Plus Jakarta Sans"', 'sans-serif']
+            serif: ['Playfair Display', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
           }
         }
       }
@@ -49,301 +49,176 @@
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      color: #2C2723;
-      background-color: #F7F4EE;
-      -webkit-tap-highlight-color: transparent;
     }
-
     .font-serif-title {
       font-family: 'Playfair Display', serif;
     }
-
-    /* Custom Scrollbar */
     ::-webkit-scrollbar {
       width: 6px;
     }
     ::-webkit-scrollbar-track {
-      background: #F7F4EE;
+      background: #F4EFEA;
     }
     ::-webkit-scrollbar-thumb {
-      background: #C59B27;
-      border-radius: 10px;
-    }
-
-    .shadow-soft {
-      box-shadow: 0 10px 30px -5px rgba(91, 44, 82, 0.08), 0 4px 12px -2px rgba(77, 99, 67, 0.05);
-    }
-    
-    .shadow-gold {
-      box-shadow: 0 8px 25px -4px rgba(197, 155, 39, 0.35);
-    }
-
-    @keyframes pulse-subtle {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-    }
-
-    .animate-pulse-subtle {
-      animation: pulse-subtle 2.5s infinite ease-in-out;
-    }
-
-    @keyframes bounce-pointer {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-    .animate-bounce-pointer {
-      animation: bounce-pointer 1.2s infinite ease-in-out;
+      background: #1E3A2B;
+      border-radius: 3px;
     }
   </style>
 </head>
+<body class="min-h-full flex flex-col justify-between text-stone-800 bg-gradient-to-b from-amber-50 via-stone-100 to-amber-100/50 pb-12">
 
-<body class="h-full flex flex-col justify-between items-center max-w-md mx-auto relative shadow-2xl min-h-screen bg-[#F7F4EE] border-x border-[#E6DFC2]">
-
-  <header class="w-full bg-[#FCFAF6] border-b border-[#E8DFD1] px-4 py-3 sticky top-0 z-30 shadow-sm flex items-center justify-between">
-    <div class="flex items-center gap-2">
-      <div class="w-9 h-9 rounded-full bg-[#5B2C52]/10 flex items-center justify-center text-[#5B2C52]">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 11v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V5.07c3.87.5 6.85 3.73 6.9 7.66.01.21.01.42 0 .63z"/>
-        </svg>
+  <header class="bg-kova-green text-amber-50 shadow-md sticky top-0 z-30">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-full bg-kova-gold flex items-center justify-center text-kova-green font-bold text-xl font-serif">
+          K
+        </div>
+        <div>
+          <h1 class="font-serif-title text-xl font-bold tracking-wide leading-none text-kova-gold">KŌVA KOMBUCHA</h1>
+          <p class="text-xs text-amber-200/80 tracking-wider">Lên Men Tự Nhiên - Trọn Vẹn Sức Khỏe</p>
+        </div>
       </div>
-      <div>
-        <h1 class="font-serif-title text-lg font-bold text-[#5B2C52] leading-none tracking-wide">KŌVA</h1>
-        <p class="text-[10px] uppercase font-semibold text-[#4D6343] tracking-widest">KOMBUCHA</p>
+      
+      <div class="flex items-center space-x-2">
+        <button id="btn-sound" class="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-all text-amber-100" title="Bật/Tắt Âm thanh">
+          <i data-lucide="volume-2" id="icon-sound" class="w-5 h-5"></i>
+        </button>
+        <button id="btn-staff-panel" class="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-all text-amber-100" title="Quản lý Quản trị viên">
+          <i data-lucide="settings" class="w-5 h-5"></i>
+        </button>
       </div>
-    </div>
-
-    <!-- Navigation / Staff Toggle -->
-    <div class="flex items-center gap-2">
-      <button id="soundToggleBtn" onclick="toggleSound()" class="p-2 rounded-full text-[#4D6343] hover:bg-[#F2ECE1] transition-colors" title="Bật/Tắt Âm Thanh">
-        <i data-lucide="volume-2" class="w-5 h-5"></i>
-      </button>
-
-      <button onclick="switchTab('staff')" class="px-3 py-1.5 rounded-full text-xs font-medium border border-[#4D6343] text-[#4D6343] bg-[#FCFAF6] hover:bg-[#4D6343] hover:text-white transition-all flex items-center gap-1.5">
-        <i data-lucide="settings" class="w-3.5 h-3.5"></i>
-        <span>Quản Lý/Staff</span>
-      </button>
     </div>
   </header>
 
-  <main class="w-full flex-1 flex flex-col items-center px-4 pt-3 pb-24 overflow-y-auto">
-
-    <!-- TAB 1: LUCKY WHEEL GAME -->
-    <div id="tab-game" class="w-full flex flex-col items-center">
-      
-      <!-- Top Promo Banner -->
-      <div class="w-full rounded-2xl bg-gradient-to-br from-[#5B2C52] via-[#6E3663] to-[#4D6343] text-white p-4 mb-3 relative overflow-hidden shadow-soft border border-[#804875]/30">
-        <div class="absolute -right-6 -bottom-6 opacity-20 pointer-events-none">
-          <svg width="140" height="140" viewBox="0 0 200 200" fill="white">
-            <path d="M100,20 C120,50 160,60 180,100 C160,140 120,150 100,180 C80,150 40,140 20,100 C40,60 80,50 100,20 Z"/>
-          </svg>
+  <main class="max-w-4xl mx-auto w-full px-4 py-6 flex-grow flex flex-col items-center">
+    
+    <!-- Toast Notification For Bonus Spin -->
+    <div id="bonus-toast" class="hidden transform transition-all duration-500 ease-out mb-4 w-full max-w-md bg-emerald-800 text-amber-50 p-4 rounded-2xl shadow-xl flex items-center justify-between border-2 border-kova-gold animate-bounce">
+      <div class="flex items-center space-x-3">
+        <div class="p-2 bg-kova-gold text-kova-green rounded-full">
+          <i data-lucide="gift" class="w-6 h-6"></i>
         </div>
-
-        <div class="relative z-10 text-center">
-          <span class="inline-block px-3 py-0.5 rounded-full bg-[#C59B27] text-white font-bold text-[11px] tracking-wider uppercase mb-1 shadow-sm">
-            Tỉ Lệ Trúng Bánh Kẹo ~85%
-          </span>
-          <h2 class="font-serif-title text-xl font-bold text-[#F7F4EE] leading-tight mb-1">
-            Uống Kombucha Miễn Phí
-          </h2>
-          <p class="text-xs text-[#E6DFC2] font-medium leading-relaxed max-w-[290px] mx-auto">
-            "Quay là chắc chắn có Bánh & Kẹo Cao Cấp mang về!"
-          </p>
-        </div>
-      </div>
-
-      <!-- Turn Counter Badge -->
-      <div class="flex items-center gap-2 mb-3 bg-[#EAE2D3] px-4 py-1.5 rounded-full border border-[#D2C3B0]/60">
-        <i data-lucide="sparkles" class="w-4 h-4 text-[#C59B27]"></i>
-        <span class="text-xs font-semibold text-[#2C2723]">Lượt quay còn lại: <strong id="spinsLeftCount" class="text-[#5B2C52] text-sm font-bold">1</strong> lượt</span>
-      </div>
-
-      <!-- Lucky Wheel Container -->
-      <div class="relative my-1 flex items-center justify-center">
-        
-        <!-- Outer Frame -->
-        <div class="w-[320px] h-[320px] sm:w-[340px] sm:h-[340px] rounded-full bg-[#FCFAF6] border-[10px] border-[#4D6343] shadow-xl flex items-center justify-center relative">
-          
-          <div class="absolute inset-0 rounded-full flex items-center justify-center pointer-events-none">
-            <div id="wheelDots" class="w-full h-full relative"></div>
-          </div>
-
-          <!-- Pointer / Needle -->
-          <div class="absolute -top-4 z-20 flex flex-col items-center animate-bounce-pointer">
-            <div class="w-8 h-10 text-[#C59B27] drop-shadow-md">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2L4 15h6v7h4v-7h6L12 2z"/>
-              </svg>
-            </div>
-          </div>
-
-          <!-- Canvas Element -->
-          <canvas id="wheelCanvas" width="300" height="300" class="rounded-full cursor-pointer transition-transform duration-100 ease-out"></canvas>
-
-          <!-- Center Spin Button -->
-          <button id="spinBtn" onclick="startSpin()" class="absolute z-10 w-16 h-16 rounded-full bg-gradient-to-b from-[#C59B27] to-[#9A7618] text-white font-bold text-sm shadow-gold border-4 border-[#FCFAF6] flex flex-col items-center justify-center hover:scale-105 active:scale-95 transition-all">
-            <span class="leading-none text-xs tracking-wider">QUAY</span>
-            <span class="text-[9px] font-normal opacity-90 leading-tight">NGAY</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Pairing Hint / Subtext -->
-      <div class="mt-3 text-center max-w-[320px] bg-[#FCFAF6] p-3 rounded-xl border border-[#E6DFC2] text-xs text-[#5B2C52]/90">
-        <p class="font-medium flex items-center justify-center gap-1 text-[#4D6343]">
-          <i data-lucide="utensils" class="w-3.5 h-3.5"></i>
-          Gợi Ý Combo Bánh Kẹo & Kombucha
-        </p>
-        <p class="text-[11px] text-[#2C2723]/70 mt-1">
-          Bánh ngọt đượm vị sẽ cực kỳ cuốn khi dùng kèm <strong>KŌVA Kombucha Nho</strong> mát lạnh thanh chua!
-        </p>
-      </div>
-
-      <!-- History & Rules -->
-      <div class="w-full flex items-center justify-center gap-3 mt-4">
-        <button onclick="switchTab('prizes')" class="text-xs font-semibold text-[#5B2C52] underline flex items-center gap-1">
-          <i data-lucide="ticket" class="w-4 h-4"></i>
-          Voucher của tôi (<span id="userVoucherCount">0</span>)
-        </button>
-        <span class="text-gray-300">|</span>
-        <button onclick="toggleRulesModal(true)" class="text-xs font-semibold text-[#4D6343] flex items-center gap-1">
-          <i data-lucide="info" class="w-4 h-4"></i>
-          Thể lệ ưu đãi
-        </button>
-      </div>
-
-    </div>
-
-    <!-- TAB 2: MY VOUCHERS -->
-    <div id="tab-prizes" class="w-full hidden flex-col">
-      <div class="flex items-center justify-between mb-4">
-        <h2 class="font-serif-title text-xl font-bold text-[#5B2C52]">Kho Voucher Của Bạn</h2>
-        <button onclick="switchTab('game')" class="text-xs bg-[#EAE2D3] text-[#2C2723] px-3 py-1.5 rounded-full font-medium flex items-center gap-1">
-          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Vòng quay
-        </button>
-      </div>
-
-      <div id="voucherListContainer" class="space-y-3 w-full">
-        <!-- Vouchers dynamic content -->
-      </div>
-    </div>
-
-    <!-- TAB 3: STAFF & PROBABILITY CONTROL PANEL -->
-    <div id="tab-staff" class="w-full hidden flex-col">
-      <div class="flex items-center justify-between mb-4">
         <div>
-          <h2 class="font-serif-title text-xl font-bold text-[#5B2C52]">Quản Lý & Cấu Hình</h2>
-          <p class="text-xs text-gray-500">Xác thực QR & Tùy chỉnh tỉ lệ trúng thưởng</p>
+          <p class="font-bold text-sm text-kova-gold">Ưu Đãi Truy Cập Trang Web!</p>
+          <p class="text-xs text-amber-100">Bạn được tự động tặng thêm <span class="font-bold underline text-white">+1 lượt quay miễn phí</span>!</p>
         </div>
-        <button onclick="switchTab('game')" class="text-xs bg-[#EAE2D3] text-[#2C2723] px-3 py-1.5 rounded-full font-medium flex items-center gap-1">
-          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Trở về
+      </div>
+      <button onclick="closeBonusToast()" class="text-amber-200 hover:text-white p-1">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="w-full max-w-md bg-white p-1.5 rounded-2xl shadow-sm border border-stone-200 flex mb-6">
+      <button id="tab-wheel" onclick="switchTab('wheel')" class="flex-1 py-2.5 px-4 rounded-xl font-medium text-sm transition-all duration-200 flex items-center justify-center space-x-2 bg-kova-green text-white shadow-sm">
+        <i data-lucide="disc" class="w-4 h-4"></i>
+        <span>Vòng Quay</span>
+      </button>
+      <button id="tab-vouchers" onclick="switchTab('vouchers')" class="flex-1 py-2.5 px-4 rounded-xl font-medium text-sm transition-all duration-200 flex items-center justify-center space-x-2 text-stone-600 hover:text-kova-green">
+        <i data-lucide="ticket" class="w-4 h-4"></i>
+        <span>Kho Voucher (<span id="voucher-count-badge">0</span>)</span>
+      </button>
+    </div>
+
+    <!-- TAB 1: WHEEL SECTION -->
+    <div id="section-wheel" class="w-full flex flex-col items-center">
+      
+      <!-- User Spin Status Card -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-stone-200 mb-6 w-full max-w-md text-center flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="w-12 h-12 rounded-2xl bg-amber-100 text-kova-green flex items-center justify-center font-bold">
+            <i data-lucide="sparkles" class="w-6 h-6 text-kova-rust"></i>
+          </div>
+          <div class="text-left">
+            <p class="text-xs text-stone-500 font-medium">Lượt quay khả dụng</p>
+            <p class="text-xl font-bold text-kova-green"><span id="spins-left-display" class="text-2xl text-kova-rust font-serif">1</span> lượt</p>
+          </div>
+        </div>
+        <button id="btn-add-spin" class="px-3.5 py-2 bg-amber-100 hover:bg-amber-200 text-kova-green rounded-xl text-xs font-semibold transition-all flex items-center space-x-1">
+          <i data-lucide="plus-circle" class="w-4 h-4"></i>
+          <span>Thêm lượt</span>
         </button>
       </div>
 
-      <!-- Verification Input Box -->
-      <div class="bg-[#FCFAF6] p-4 rounded-2xl border border-[#E6DFC2] shadow-soft mb-5">
-        <label class="block text-xs font-bold text-[#5B2C52] uppercase tracking-wider mb-2">Nhập Mã Voucher Hoặc Quét QR Đổi Quà</label>
-        <div class="flex gap-2">
-          <input type="text" id="staffInputCode" placeholder="Mã VD: KOVA-78A92" class="flex-1 bg-white border border-[#D2C3B0] rounded-xl px-3 py-2.5 text-sm font-mono focus:outline-none focus:border-[#5B2C52]">
-          <button onclick="verifyCodeFromInput()" class="bg-[#5B2C52] text-white px-4 py-2.5 rounded-xl font-semibold text-xs hover:bg-[#804875] transition-colors">
-            Kiểm Tra
+      <!-- Wheel Container -->
+      <div class="relative my-2 w-full max-w-[340px] sm:max-w-[400px] aspect-square flex items-center justify-center">
+        <!-- Pointer Arrow -->
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-20 w-8 h-10 drop-shadow-md">
+          <div class="w-0 h-0 border-l-[16px] border-l-transparent border-r-[16px] border-r-transparent border-t-[32px] border-t-kova-rust"></div>
+        </div>
+
+        <!-- Canvas Wheel -->
+        <div class="relative w-full h-full p-3 bg-kova-green rounded-full shadow-2xl border-4 border-kova-gold">
+          <canvas id="wheelCanvas" width="500" height="500" class="w-full h-full rounded-full cursor-pointer transition-transform duration-100"></canvas>
+          
+          <!-- Center Button / Hub -->
+          <button id="btn-spin" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-kova-gold to-amber-600 rounded-full border-4 border-white shadow-xl flex flex-col items-center justify-center text-white font-bold hover:scale-105 active:scale-95 transition-transform z-10">
+            <span class="text-xs uppercase tracking-wider font-semibold">BẮT ĐẦU</span>
+            <span class="text-lg font-serif-title font-extrabold leading-none">QUAY</span>
           </button>
         </div>
       </div>
 
-      <div id="staffResultCard" class="hidden p-4 rounded-2xl border transition-all mb-5">
-        <!-- Dynamic Result -->
-      </div>
+      <p class="text-xs text-stone-500 mt-6 text-center max-w-xs">
+        * Nhấn vào nút QUAY hoặc nhấp trực tiếp vào vòng quay để tìm kiếm phần thưởng Kombucha & Bánh Kẹo hấp dẫn!
+      </p>
 
-      <!-- ADMIN PROBABILITY WEIGHTS PANEL -->
-      <div class="bg-[#FCFAF6] p-4 rounded-2xl border border-[#C59B27]/40 shadow-soft mb-5">
-        <div class="flex items-center justify-between mb-3 border-b border-[#E6DFC2] pb-2">
-          <div class="flex items-center gap-1.5">
-            <i data-lucide="sliders" class="w-4 h-4 text-[#C59B27]"></i>
-            <h3 class="text-xs font-bold text-[#5B2C52] uppercase tracking-wider">Cấu Hình Tỉ Lệ Trúng (% Ô Quay)</h3>
-          </div>
-          <button onclick="resetDefaultWeights()" class="text-[10px] text-[#4D6343] font-semibold underline">Khôi phục gốc</button>
-        </div>
+    </div>
 
-        <p class="text-[11px] text-gray-500 mb-3">Tùy chỉnh tỉ lệ trúng thưởng từng ô. Hệ thống sẽ tự tính toán tổng % chính xác.</p>
+    <!-- TAB 2: VOUCHER STORE SECTION -->
+    <div id="section-vouchers" class="w-full max-w-md hidden">
+      <div class="bg-white rounded-2xl p-5 shadow-sm border border-stone-200 min-h-[350px]">
+        <h2 class="font-serif-title font-bold text-lg text-kova-green mb-4 flex items-center justify-between">
+          <span>Tủ Quà & Voucher</span>
+          <span class="text-xs font-normal text-stone-500 font-sans" id="voucher-total-text">0 quà tặng</span>
+        </h2>
 
-        <div id="weightsControlList" class="space-y-3">
-          <!-- Dynamic Sliders via JS -->
-        </div>
+        <!-- Voucher List Container -->
+        <div id="voucher-list" class="space-y-3"></div>
 
-        <button onclick="saveProbabilityWeights()" class="w-full mt-4 py-2.5 bg-[#4D6343] text-white font-bold rounded-xl text-xs hover:bg-[#5E7A52] transition-colors flex items-center justify-center gap-1">
-          <i data-lucide="save" class="w-3.5 h-3.5"></i>
-          Lưu Cấu Hình Tỉ Lệ Mới
-        </button>
-      </div>
-
-      <!-- Recent Redeemed Log -->
-      <div>
-        <h3 class="text-xs font-bold uppercase tracking-wider text-[#4D6343] mb-2">Lịch Sử Đổi Quà Gần Đây</h3>
-        <div id="staffHistoryList" class="space-y-2 text-xs">
-          <!-- Log List -->
+        <!-- Empty State -->
+        <div id="voucher-empty" class="hidden py-12 text-center text-stone-400">
+          <i data-lucide="ticket-slash" class="w-12 h-12 mx-auto mb-2 opacity-50"></i>
+          <p class="text-sm font-medium">Bạn chưa nhận được voucher nào.</p>
+          <p class="text-xs text-stone-400 mt-1">Hãy dùng lượt quay may mắn để trúng quà nhé!</p>
         </div>
       </div>
     </div>
 
   </main>
 
-  <!-- PRIZE WINNING MODAL -->
-  <div id="prizeModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-[#FCFAF6] rounded-3xl w-full max-w-sm overflow-hidden shadow-2xl border border-[#C59B27]/40 relative animate-pulse-subtle">
+  <!-- STAFF / ADMIN CONTROL PANEL MODAL -->
+  <div id="modal-staff" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden border border-stone-200">
       
-      <!-- Modal Header Banner -->
-      <div class="bg-gradient-to-r from-[#5B2C52] to-[#4D6343] text-white p-5 text-center relative">
-        <button onclick="closePrizeModal()" class="absolute right-3 top-3 text-white/70 hover:text-white p-1">
+      <div class="bg-kova-green text-amber-50 p-4 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="sliders" class="w-5 h-5 text-kova-gold"></i>
+          <h3 class="font-serif-title font-bold text-lg">Quản Lý Tỉ Lệ Trúng Thưởng</h3>
+        </div>
+        <button onclick="closeStaffModal()" class="text-stone-300 hover:text-white">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
-        <div class="w-12 h-12 rounded-full bg-[#C59B27] text-white mx-auto flex items-center justify-center mb-2 shadow-md">
-          <i data-lucide="cake" class="w-6 h-6"></i>
-        </div>
-        <h3 class="font-serif-title text-xl font-bold">TRÚNG QUÀ BÁNH KẸO!</h3>
-        <p class="text-xs text-[#E6DFC2]">Ưu đãi hấp dẫn từ KŌVA Kombucha</p>
       </div>
 
-      <!-- Modal Body -->
-      <div class="p-5 text-center">
-        <!-- High-Value Badge -->
-        <span id="modalHighValueBadge" class="inline-block bg-[#C59B27]/15 text-[#8A670F] border border-[#C59B27]/40 font-bold text-[10px] px-3 py-0.5 rounded-full uppercase tracking-wider mb-2">
-          ⭐ Giải Xịn Cao Cấp
-        </span>
+      <div class="p-5 overflow-y-auto space-y-4 flex-1">
+        <p class="text-xs text-stone-500">
+          Chỉnh sửa tỉ lệ xuất hiện (trọng số) của từng giải thưởng. Tỉ lệ trúng thưởng sẽ tự động tính toán lại.
+        </p>
 
-        <!-- Reward Title -->
-        <div class="p-3 bg-[#F7F4EE] rounded-xl border border-[#D2C3B0]">
-          <p class="text-[11px] font-semibold text-[#4D6343] uppercase tracking-wider">Phần Quà Nhận Được</p>
-          <h4 id="modalPrizeTitle" class="text-base font-bold text-[#5B2C52] mt-1 leading-snug">
-            Tặng 1 gói kẹo/1 chiếc bánh cao cấp bất kỳ
-          </h4>
-        </div>
+        <div id="staff-weights-container" class="space-y-3"></div>
+      </div>
 
-        <!-- Pairing Suggestion Box -->
-        <div id="pairingSuggestionBox" class="mt-3 p-3 bg-[#5B2C52]/5 rounded-xl border border-[#5B2C52]/20 text-left">
-          <div class="flex items-start gap-2">
-            <span class="text-lg flex-shrink-0">🍇</span>
-            <div>
-              <p class="text-[11px] font-bold text-[#5B2C52] uppercase tracking-wider">Gợi Ý Kombucha Pairing Hợp Vị</p>
-              <p id="modalPairingText" class="text-xs text-[#2C2723] mt-0.5 leading-relaxed">
-                Bánh ngọt ngào kết hợp tuyệt vời nhất cùng <strong>KŌVA Kombucha Nho</strong> lên men tự nhiên giúp cân bằng vị giác!
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- QR Code Container -->
-        <div class="mt-4 flex flex-col items-center">
-          <p class="text-[11px] text-gray-500 mb-1">Mã QR dùng 1 lần đưa Thu Ngân nhận quà:</p>
-          <div id="qrcode" class="p-2 bg-white rounded-xl border border-gray-200 shadow-sm flex items-center justify-center min-w-[130px] min-h-[130px]"></div>
-          <p id="modalVoucherToken" class="font-mono text-xs font-bold text-[#5B2C52] mt-2 bg-[#EAE2D3] px-2.5 py-1 rounded-md">
-            KOVA-XXXXX
-          </p>
-        </div>
-
-        <!-- Actions -->
-        <div class="mt-5">
-          <button onclick="closePrizeModal()" class="w-full py-3 bg-gradient-to-r from-[#5B2C52] to-[#804875] text-white rounded-xl font-bold text-xs shadow-md hover:opacity-90 transition-opacity">
-            NHẬN VOUCHER & ĐỔI TẠI QUẦY
+      <div class="bg-stone-50 p-4 border-t border-stone-200 flex justify-between items-center">
+        <button onclick="resetWeightsToDefault()" class="px-3 py-2 text-xs text-stone-600 hover:text-red-600 font-medium">
+          Mặc định ban đầu
+        </button>
+        <div class="flex space-x-2">
+          <button onclick="closeStaffModal()" class="px-4 py-2 bg-stone-200 text-stone-700 text-xs font-semibold rounded-xl hover:bg-stone-300">
+            Hủy
+          </button>
+          <button onclick="saveStaffWeights()" class="px-4 py-2 bg-kova-green text-white text-xs font-semibold rounded-xl hover:bg-kova-olive shadow-sm">
+            Lưu Thiết Lập
           </button>
         </div>
       </div>
@@ -351,601 +226,534 @@
     </div>
   </div>
 
-  <!-- RULES MODAL -->
-  <div id="rulesModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-[#FCFAF6] rounded-2xl w-full max-w-sm p-5 shadow-2xl border border-[#E6DFC2] relative">
-      <button onclick="toggleRulesModal(false)" class="absolute right-3 top-3 text-gray-400 hover:text-gray-700">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
-      <h3 class="font-serif-title text-lg font-bold text-[#5B2C52] mb-3 flex items-center gap-2">
-        <i data-lucide="file-text" class="w-5 h-5 text-[#4D6343]"></i> Thể Lệ Ưu Đãi
-      </h3>
-      <div class="text-xs text-[#2C2723] space-y-2 max-h-[60vh] overflow-y-auto pr-1 leading-relaxed">
-        <p>1. <strong>Tỉ lệ trúng Bánh Kẹo siêu cao (~85%):</strong> Mọi lượt quay đều chắc chắn nhận được ưu đãi Bánh, Kẹo hoặc Kombucha miễn phí.</p>
-        <p>2. <strong>Mã QR 1 lần:</strong> Đưa mã QR trên màn hình điện thoại cho thu ngân tại cửa hàng khi thanh toán. Mỗi mã chỉ dùng 1 lần duy nhất.</p>
-        <p>3. <strong>Kombucha Pairing:</strong> Nhận gợi ý vị Kombucha Nho / Chanh Sả / Dâu mâm xôi hợp gu nhất với loại bánh kẹo bạn quay trúng.</p>
+  <!-- PRIZE WINNER MODAL -->
+  <div id="modal-result" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl transform transition-all border-4 border-kova-gold relative">
+      <div class="w-16 h-16 bg-amber-100 text-kova-rust rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-kova-gold">
+        <i data-lucide="gift" class="w-8 h-8"></i>
       </div>
-      <button onclick="toggleRulesModal(false)" class="w-full mt-4 py-2.5 bg-[#4D6343] text-white font-bold rounded-xl text-xs">
-        Đã Hiểu
+      
+      <p class="text-xs font-bold uppercase tracking-widest text-kova-rust mb-1">Chúc Mừng Bạn!</p>
+      <h3 id="result-prize-title" class="font-serif-title text-2xl font-bold text-kova-green mb-2">Voucher KŌVA</h3>
+      <p id="result-prize-desc" class="text-xs text-stone-600 mb-6">Bạn đã trúng một phần thưởng đặc biệt từ KŌVA Kombucha.</p>
+
+      <div class="space-y-2">
+        <button id="btn-claim-prize" onclick="claimPrizeToVouchers()" class="w-full py-3 bg-kova-green hover:bg-kova-olive text-white font-bold rounded-xl shadow-md transition-all text-sm flex items-center justify-center space-x-2">
+          <i data-lucide="ticket" class="w-4 h-4"></i>
+          <span>Lưu Vào Kho Voucher</span>
+        </button>
+        <button onclick="closeResultModal()" class="w-full py-2.5 text-stone-500 hover:text-stone-700 text-xs font-semibold">
+          Quay tiếp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- QR VOUCHER MODAL -->
+  <div id="modal-qr" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl border border-stone-200">
+      <div class="flex justify-between items-center mb-4">
+        <h4 class="font-serif-title font-bold text-kova-green text-lg">Mã Ưu Đãi KŌVA</h4>
+        <button onclick="closeQRModal()" class="text-stone-400 hover:text-stone-600">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="bg-stone-50 p-4 rounded-2xl border border-dashed border-stone-300 mb-4 flex flex-col items-center">
+        <div id="qrcode-container" class="bg-white p-3 rounded-xl shadow-inner mb-3"></div>
+        <p id="qr-voucher-code" class="font-mono text-sm font-bold text-kova-rust tracking-widest">KOVA-XXXXXX</p>
+      </div>
+
+      <p id="qr-voucher-name" class="font-bold text-kova-green text-sm mb-1">Tên Voucher</p>
+      <p class="text-xs text-stone-500 mb-6">Vui lòng đưa mã QR này cho nhân viên tại quầy KŌVA Kombucha để áp dụng ưu đãi.</p>
+
+      <button onclick="closeQRModal()" class="w-full py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-bold rounded-xl">
+        Đóng
       </button>
     </div>
   </div>
 
-  <footer class="w-full bg-[#FCFAF6] border-t border-[#E8DFD1] py-3 text-center text-[10px] text-[#2C2723]/60">
-    <p class="font-serif-title font-semibold text-[#5B2C52]">KŌVA KOMBUCHA — Trà Lên Men Tự Nhiên</p>
-    <p>Chắt chíu vị nho, Gói trọn tinh hoa. Vì một lối sống xanh & lành mạnh.</p>
-  </footer>
-
   <script>
+    // --- APP STATE & EXACT ORIGINAL PRIZES ---
     const PRIZES = [
-      {
-        id: 1,
-        title: "Tặng 1 gói kẹo / 1 bánh cao cấp",
-        shortText: "Bánh/Kẹo Cao Cấp",
-        color: "#5B2C52",
-        textColor: "#FFFFFF",
-        weight: 30,
-        isHighValue: true,
-        pairing: "Bánh ngọt đượm vị hoặc kẹo trái cây cực kỳ hợp khi thưởng thức cùng KŌVA Kombucha Nho mát lạnh giúp thanh vị, chống ngấy!"
-      },
-      {
-        id: 2,
-        title: "Mua 1 bánh -> Tặng 1 Kombucha thứ 2",
-        shortText: "Mua Bánh Tặng Kombucha",
-        color: "#4D6343",
-        textColor: "#FFFFFF",
-        weight: 25,
-        isHighValue: true,
-        pairing: "Sự kết hợp hoàn hảo! Kombucha vị Chanh Sả nhẹ nhàng tôn lên hương vị giòn thơm của các loại bánh nướng."
-      },
-      {
-        id: 3,
-        title: "Giảm ngay 10k - 20k đơn Bánh Kẹo",
-        shortText: "Giảm 10k - 20k Đơn Bánh",
-        color: "#C59B27",
-        textColor: "#FFFFFF",
-        weight: 15,
-        pairing: "Dùng ưu đãi mua ngay combo Bánh Tart cùng Kombucha Nho truyền thống để có bữa xế đầy năng lượng lành mạnh."
-      },
-      {
-        id: 4,
-        title: "Tặng 1 phần Kẹo dẻo / Extra Syrup",
-        shortText: "Tặng Kẹo Dẻo / Syrup",
-        color: "#718C65",
-        textColor: "#FFFFFF",
-        weight: 15,
-        pairing: "Kẹo dẻo chua ngọt ăn kèm ly Kombucha đá mát lạnh mang đến trải nghiệm sảng khoái tức thì!"
-      },
-      {
-        id: 5,
-        title: "Tặng 1 Bộ Sticker / Móc Khóa KŌVA",
-        shortText: "Sticker / Móc Khóa",
-        color: "#804875",
-        textColor: "#FFFFFF",
-        weight: 10,
-        pairing: "Sở hữu vật phẩm KŌVA dễ thương và nhâm nhi ngay ly Kombucha lên men SCOBY chuẩn vị tự nhiên."
-      },
-      {
-        id: 6,
-        title: "Thêm 1 Lượt Quay May Mắn",
-        shortText: "Thêm 1 Lượt Quay",
-        color: "#2C2723",
-        textColor: "#FFFFFF",
-        weight: 5,
-        isExtraSpin: true,
-        pairing: "Chúc mừng bạn nhận thêm 1 cơ hội quay nữa! Hãy tiếp tục thử vận may để rinh Bánh & Kẹo ngon nhé!"
-      }
+      { id: 1, name: "Bánh/Kẹo Cao Cấp", fullTitle: "Tặng 1 gói kẹo / 1 bánh cao cấp", desc: "Tặng 1 gói kẹo ngọt ngào hoặc 1 phần bánh cao cấp tại quầy", color: "#1E3A2B", textColor: "#FAFAFA", weight: 30, type: "voucher" },
+      { id: 2, name: "Mua Bánh Tặng Kombucha", fullTitle: "Mua 1 bánh -> Tặng 1 Kombucha thứ 2", desc: "Mua 1 phần bánh bất kỳ tặng ngay 01 chai Kombucha thứ 2", color: "#E6A15C", textColor: "#1E3A2B", weight: 25, type: "voucher" },
+      { id: 3, name: "Giảm 10k - 20k Đơn Bánh", fullTitle: "Giảm ngay 10k - 20k đơn Bánh Kẹo", desc: "Giảm trực tiếp 10.000đ - 20.000đ cho đơn hàng Bánh Kẹo", color: "#2D5A3F", textColor: "#FAFAFA", weight: 15, type: "voucher" },
+      { id: 4, name: "Tặng Kẹo Dẻo / Syrup", fullTitle: "Tặng 1 phần Kẹo dẻo / Extra Syrup", desc: "Tặng 1 phần Kẹo dẻo trái cây hoặc Extra Syrup tự chọn", color: "#D4AF37", textColor: "#1E3A2B", weight: 15, type: "voucher" },
+      { id: 5, name: "Sticker / Móc Khóa", fullTitle: "Tặng 1 Bộ Sticker / Móc Khóa KŌVA", desc: "Tặng 01 Bộ Sticker thương hiệu hoặc Móc khóa KŌVA độc quyền", color: "#C85A32", textColor: "#FAFAFA", weight: 10, type: "voucher" },
+      { id: 6, name: "Thêm 1 Lượt Quay", fullTitle: "Thêm 1 Lượt Quay May Mắn", desc: "Chúc mừng bạn nhận thêm 1 lượt quay miễn phí ngay lập tức!", color: "#FAFAFA", textColor: "#1E3A2B", weight: 5, type: "extra_spin" }
     ];
 
-    let state = {
-      spinsLeft: 1,
-      isSpinning: false,
-      soundEnabled: true,
-      currentRotation: 0,
-      vouchers: [],
-      redeemedLog: [],
-      weights: PRIZES.map(p => p.weight)
-    };
+    let spinsLeft = 1;
+    let soundEnabled = true;
+    let isSpinning = false;
+    let currentAngle = 0;
+    let userVouchers = [];
+    let pendingPrize = null;
 
-    function getRandomSectorIndex() {
-      const weights = state.weights;
-      const totalWeight = weights.reduce((sum, w) => sum + w, 0);
-      let randomVal = Math.random() * totalWeight;
+    // --- WEB AUDIO API SYSTEM ---
+    class SoundEffects {
+      constructor() {
+        this.ctx = null;
+      }
 
-      for (let i = 0; i < weights.length; i++) {
-        if (randomVal < weights[i]) {
-          return i;
+      initCtx() {
+        if (!this.ctx) {
+          this.ctx = new (window.AudioContext || window.webkitAudioContext)();
         }
-        randomVal -= weights[i];
       }
-      return 0;
-    }
 
-    let audioCtx = null;
-    function initAudio() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-    }
-
-    function playTickSound() {
-      if (!state.soundEnabled) return;
-      try {
-        initAudio();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(600, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.04);
-        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.04);
+      playTick() {
+        if (!soundEnabled) return;
+        this.initCtx();
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(600, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.04);
+        gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.04);
         osc.connect(gain);
-        gain.connect(audioCtx.destination);
+        gain.connect(this.ctx.destination);
         osc.start();
-        osc.stop(audioCtx.currentTime + 0.05);
-      } catch (e) {}
-    }
+        osc.stop(this.ctx.currentTime + 0.04);
+      }
 
-    function playWinSound() {
-      if (!state.soundEnabled) return;
-      try {
-        initAudio();
-        const now = audioCtx.currentTime;
-        [261.63, 329.63, 392.00, 523.25].forEach((freq, idx) => {
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, now + idx * 0.08);
-          gain.gain.setValueAtTime(0.2, now + idx * 0.08);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.3);
+      playWin() {
+        if (!soundEnabled) return;
+        this.initCtx();
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, idx) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0, this.ctx.currentTime + idx * 0.1);
+          gain.gain.linearRampToValueAtTime(0.2, this.ctx.currentTime + idx * 0.1 + 0.05);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + idx * 0.1 + 0.3);
           osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.start(now + idx * 0.08);
-          osc.stop(now + idx * 0.08 + 0.3);
+          gain.connect(this.ctx.destination);
+          osc.start(this.ctx.currentTime + idx * 0.1);
+          osc.stop(this.ctx.currentTime + idx * 0.1 + 0.3);
         });
-      } catch (e) {}
+      }
     }
 
-    function toggleSound() {
-      state.soundEnabled = !state.soundEnabled;
-      const soundBtn = document.getElementById('soundToggleBtn');
-      soundBtn.innerHTML = state.soundEnabled 
-        ? `<i data-lucide="volume-2" class="w-5 h-5"></i>` 
-        : `<i data-lucide="volume-x" class="w-5 h-5 text-gray-400"></i>`;
-      lucide.createIcons();
+    const sound = new SoundEffects();
+
+    // --- INITIALIZATION ---
+    window.addEventListener('load', () => {
+      loadState();
+      
+      // REQUIREMENT 1: Automatically add 1 free spin on each page visit / reload
+      spinsLeft += 1;
+      saveState();
+      showBonusToast();
+
+      updateSpinsDisplay();
+      renderWheel();
+      renderVouchers();
+      initLucide();
+    });
+
+    function initLucide() {
+      if (window.lucide) {
+        lucide.createIcons();
+      }
     }
 
+    // --- LOCAL STORAGE STATE MANAGEMENT ---
     function loadState() {
-      const savedVouchers = localStorage.getItem('kova_vouchers');
-      if (savedVouchers) state.vouchers = JSON.parse(savedVouchers);
-
       const savedSpins = localStorage.getItem('kova_spins');
-      if (savedSpins !== null) state.spinsLeft = parseInt(savedSpins, 10);
+      if (savedSpins !== null) {
+        spinsLeft = parseInt(savedSpins, 10);
+      }
 
-      const savedLog = localStorage.getItem('kova_staff_log');
-      if (savedLog) state.redeemedLog = JSON.parse(savedLog);
+      const savedVouchers = localStorage.getItem('kova_vouchers');
+      if (savedVouchers) {
+        try {
+          userVouchers = JSON.parse(savedVouchers);
+        } catch (e) {
+          userVouchers = [];
+        }
+      }
 
       const savedWeights = localStorage.getItem('kova_weights');
-      if (savedWeights) state.weights = JSON.parse(savedWeights);
-
-      updateUI();
+      if (savedWeights) {
+        try {
+          const weightsObj = JSON.parse(savedWeights);
+          PRIZES.forEach(p => {
+            if (weightsObj[p.id] !== undefined) {
+              p.weight = weightsObj[p.id];
+            }
+          });
+        } catch (e) {}
+      }
     }
 
     function saveState() {
-      localStorage.setItem('kova_vouchers', JSON.stringify(state.vouchers));
-      localStorage.setItem('kova_spins', state.spinsLeft.toString());
-      localStorage.setItem('kova_staff_log', JSON.stringify(state.redeemedLog));
-      localStorage.setItem('kova_weights', JSON.stringify(state.weights));
-      updateUI();
+      localStorage.setItem('kova_spins', spinsLeft);
+      localStorage.setItem('kova_vouchers', JSON.stringify(userVouchers));
+      
+      const weightsObj = {};
+      PRIZES.forEach(p => weightsObj[p.id] = p.weight);
+      localStorage.setItem('kova_weights', JSON.stringify(weightsObj));
     }
 
-    function updateUI() {
-      document.getElementById('spinsLeftCount').innerText = state.spinsLeft;
-      document.getElementById('userVoucherCount').innerText = state.vouchers.length;
-      renderVoucherList();
-      renderStaffHistory();
-      renderWeightsControls();
+    // --- BONUS TOAST SYSTEM ---
+    function showBonusToast() {
+      const toast = document.getElementById('bonus-toast');
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        closeBonusToast();
+      }, 5000);
     }
 
-    const canvas = document.getElementById('wheelCanvas');
-    const ctx = canvas.getContext('2d');
-    const numSectors = PRIZES.length;
-    const arcSize = (2 * Math.PI) / numSectors;
+    function closeBonusToast() {
+      const toast = document.getElementById('bonus-toast');
+      toast.classList.add('hidden');
+    }
 
-    function drawWheel() {
-      const radius = canvas.width / 2;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    function updateSpinsDisplay() {
+      document.getElementById('spins-left-display').textContent = spinsLeft;
+    }
 
-      for (let i = 0; i < numSectors; i++) {
-        const angle = state.currentRotation + i * arcSize;
-        const prize = PRIZES[i];
+    // --- WHEEL RENDERING ---
+    function renderWheel() {
+      const canvas = document.getElementById('wheelCanvas');
+      const ctx = canvas.getContext('2d');
+      const width = canvas.width;
+      const height = canvas.height;
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const radius = width / 2 - 10;
+      const sliceAngle = (2 * Math.PI) / PRIZES.length;
 
+      ctx.clearRect(0, 0, width, height);
+
+      PRIZES.forEach((prize, index) => {
+        const startAngle = index * sliceAngle + currentAngle;
+        const endAngle = startAngle + sliceAngle;
+
+        // Slice Background
         ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+        ctx.closePath();
         ctx.fillStyle = prize.color;
-        ctx.moveTo(radius, radius);
-        ctx.arc(radius, radius, radius - 4, angle, angle + arcSize);
-        ctx.lineTo(radius, radius);
         ctx.fill();
-
         ctx.lineWidth = 2;
-        ctx.strokeStyle = '#FCFAF6';
+        ctx.strokeStyle = '#FFFFFF';
         ctx.stroke();
 
+        // Text Content
         ctx.save();
-        ctx.translate(radius, radius);
-        ctx.rotate(angle + arcSize / 2);
-        ctx.textAlign = 'right';
+        ctx.translate(centerX, centerY);
+        ctx.rotate(startAngle + sliceAngle / 2);
+        ctx.textAlign = "right";
         ctx.fillStyle = prize.textColor;
-        ctx.font = 'bold 11px "Plus Jakarta Sans", sans-serif';
-
-        const words = prize.shortText.split(' ');
-        if (words.length > 2) {
-          const line1 = words.slice(0, Math.ceil(words.length / 2)).join(' ');
-          const line2 = words.slice(Math.ceil(words.length / 2)).join(' ');
-          ctx.fillText(line1, radius - 18, -5);
-          ctx.fillText(line2, radius - 18, 10);
-        } else {
-          ctx.fillText(prize.shortText, radius - 18, 4);
-        }
-
+        ctx.font = "bold 17px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText(prize.name, radius - 25, 6);
         ctx.restore();
-      }
+      });
 
+      // Outer Ring Accent
       ctx.beginPath();
-      ctx.arc(radius, radius, 34, 0, 2 * Math.PI);
-      ctx.fillStyle = '#FCFAF6';
-      ctx.fill();
-      ctx.lineWidth = 3;
-      ctx.strokeStyle = '#C59B27';
+      ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+      ctx.lineWidth = 8;
+      ctx.strokeStyle = '#D4AF37';
       ctx.stroke();
     }
 
-    function createWheelDots() {
-      const container = document.getElementById('wheelDots');
-      container.innerHTML = '';
-      const totalDots = 12;
-      for (let i = 0; i < totalDots; i++) {
-        const dot = document.createElement('div');
-        const angle = (i * (360 / totalDots)) * (Math.PI / 180);
-        const radius = 152;
-        const x = 160 + radius * Math.cos(angle) - 4;
-        const y = 160 + radius * Math.sin(angle) - 4;
-        dot.className = 'absolute w-2 h-2 rounded-full bg-[#C59B27] border border-white shadow-sm';
-        dot.style.left = `${x}px`;
-        dot.style.top = `${y}px`;
-        container.appendChild(dot);
+    // --- SPIN LOGIC ---
+    document.getElementById('btn-spin').addEventListener('click', startSpin);
+    document.getElementById('wheelCanvas').addEventListener('click', startSpin);
+    document.getElementById('btn-add-spin').addEventListener('click', () => {
+      spinsLeft += 1;
+      saveState();
+      updateSpinsDisplay();
+    });
+
+    function getRandomPrizeByWeight() {
+      const totalWeight = PRIZES.reduce((sum, item) => sum + item.weight, 0);
+      let randomNum = Math.random() * totalWeight;
+      for (let prize of PRIZES) {
+        if (randomNum < prize.weight) {
+          return prize;
+        }
+        randomNum -= prize.weight;
       }
+      return PRIZES[0];
     }
 
-    let lastSectorIndex = -1;
-
     function startSpin() {
-      if (state.isSpinning) return;
-      if (state.spinsLeft <= 0) {
-        showCustomMessage("Bạn đã hết lượt quay! Hãy đổi quà tại quầy hoặc quay lại sau nhé.");
+      if (isSpinning) return;
+      if (spinsLeft <= 0) {
+        alert("Bạn đã hết lượt quay! Nhấn 'Thêm lượt' hoặc tải lại trang để có thêm lượt quay.");
         return;
       }
 
-      initAudio();
-      state.isSpinning = true;
-      state.spinsLeft--;
+      isSpinning = true;
+      spinsLeft -= 1;
       saveState();
+      updateSpinsDisplay();
 
-      document.getElementById('spinBtn').disabled = true;
+      const selectedPrize = getRandomPrizeByWeight();
+      pendingPrize = selectedPrize;
 
-      const selectedIndex = getRandomSectorIndex();
+      const prizeIndex = PRIZES.findIndex(p => p.id === selectedPrize.id);
+      const numSlices = PRIZES.length;
+      const sliceAngle = (2 * Math.PI) / numSlices;
+
+      const targetSliceCenter = prizeIndex * sliceAngle + sliceAngle / 2;
+      const targetAngle = (3 * Math.PI / 2) - targetSliceCenter;
       
-      const extraSpins = 5 + Math.floor(Math.random() * 3);
-      const sectorAngle = (2 * Math.PI) / numSectors;
-      const targetSectorCenter = selectedIndex * sectorAngle + sectorAngle / 2;
-      const targetRotation = (2 * Math.PI * extraSpins) + (1.5 * Math.PI - targetSectorCenter);
+      const fullRotations = 5 * 2 * Math.PI;
+      const finalAngle = currentAngle + fullRotations + ((targetAngle - (currentAngle % (2 * Math.PI)) + 4 * Math.PI) % (2 * Math.PI));
 
-      const startRotation = state.currentRotation % (2 * Math.PI);
-      const totalDistance = targetRotation - startRotation;
-      const duration = 4500;
+      const duration = 4000;
       const startTime = performance.now();
+      let lastTickAngle = currentAngle;
 
       function animateSpin(now) {
         const elapsed = now - startTime;
         const progress = Math.min(elapsed / duration, 1);
         
         const easeOut = 1 - Math.pow(1 - progress, 3);
-        state.currentRotation = startRotation + totalDistance * easeOut;
+        currentAngle = currentAngle + (finalAngle - currentAngle) * (easeOut * 0.1);
 
-        const currentNormalizedAngle = (1.5 * Math.PI - (state.currentRotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
-        const currentSectorIndex = Math.floor(currentNormalizedAngle / sectorAngle);
-        if (currentSectorIndex !== lastSectorIndex) {
-          playTickSound();
-          lastSectorIndex = currentSectorIndex;
+        if (Math.abs(currentAngle - lastTickAngle) >= sliceAngle) {
+          sound.playTick();
+          lastTickAngle = currentAngle;
         }
 
-        drawWheel();
+        renderWheel();
 
-        if (progress < 1) {
+        if (progress < 1 && Math.abs(finalAngle - currentAngle) > 0.001) {
           requestAnimationFrame(animateSpin);
         } else {
-          state.isSpinning = false;
-          document.getElementById('spinBtn').disabled = false;
-          handleWin(PRIZES[selectedIndex]);
+          currentAngle = finalAngle;
+          renderWheel();
+          isSpinning = false;
+          onSpinComplete(selectedPrize);
         }
       }
 
       requestAnimationFrame(animateSpin);
     }
 
-    function handleWin(prize) {
-      playWinSound();
+    function onSpinComplete(prize) {
+      sound.playWin();
 
-      confetti({
-        particleCount: 85,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
-
-      if (prize.isExtraSpin) {
-        state.spinsLeft += 1;
-        saveState();
+      if (window.confetti) {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
       }
 
-      const token = 'KOVA-' + Math.random().toString(36).substring(2, 7).toUpperCase();
-      const newVoucher = {
-        token: token,
-        prizeId: prize.id,
-        prizeTitle: prize.title,
-        pairing: prize.pairing,
-        isHighValue: !!prize.isHighValue,
-        createdAt: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' }),
-        status: 'unused'
-      };
+      document.getElementById('result-prize-title').textContent = prize.fullTitle;
+      document.getElementById('result-prize-desc').textContent = prize.desc;
 
-      state.vouchers.unshift(newVoucher);
-      saveState();
-
-      showPrizeModal(newVoucher);
-    }
-
-    function showCustomMessage(msg) {
-      alert(msg); // Falls back safely or replaced by custom overlay if desired
-    }
-
-    function showPrizeModal(voucher) {
-      document.getElementById('modalPrizeTitle').innerText = voucher.prizeTitle;
-      document.getElementById('modalPairingText').innerText = voucher.pairing;
-      document.getElementById('modalVoucherToken').innerText = voucher.token;
-
-      const badge = document.getElementById('modalHighValueBadge');
-      if (voucher.isHighValue) {
-        badge.classList.remove('hidden');
+      const claimBtn = document.getElementById('btn-claim-prize');
+      if (prize.type === 'extra_spin') {
+        claimBtn.innerHTML = `<i data-lucide="plus-circle" class="w-4 h-4"></i><span>Nhận 1 Lượt Quay</span>`;
       } else {
-        badge.classList.add('hidden');
+        claimBtn.innerHTML = `<i data-lucide="ticket" class="w-4 h-4"></i><span>Lưu Vào Kho Voucher</span>`;
       }
+      initLucide();
 
-      const qrContainer = document.getElementById('qrcode');
-      qrContainer.innerHTML = '';
-      new QRCode(qrContainer, {
-        text: voucher.token,
-        width: 120,
-        height: 120,
-        colorDark : "#5B2C52",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
-      });
-
-      document.getElementById('prizeModal').classList.remove('hidden');
+      document.getElementById('modal-result').classList.remove('hidden');
     }
 
-    function closePrizeModal() {
-      document.getElementById('prizeModal').classList.add('hidden');
+    function closeResultModal() {
+      document.getElementById('modal-result').classList.add('hidden');
     }
 
-    function toggleRulesModal(show) {
-      const modal = document.getElementById('rulesModal');
-      if (show) modal.classList.remove('hidden');
-      else modal.classList.add('hidden');
-    }
+    function claimPrizeToVouchers() {
+      if (pendingPrize) {
+        if (pendingPrize.type === 'extra_spin') {
+          spinsLeft += 1;
+          saveState();
+          updateSpinsDisplay();
+          closeResultModal();
+          return;
+        }
 
-    function switchTab(tabName) {
-      document.getElementById('tab-game').classList.add('hidden');
-      document.getElementById('tab-prizes').classList.add('hidden');
-      document.getElementById('tab-staff').classList.add('hidden');
-
-      if (tabName === 'game') document.getElementById('tab-game').classList.remove('hidden');
-      if (tabName === 'prizes') {
-        document.getElementById('tab-prizes').classList.remove('hidden');
-        renderVoucherList();
+        const voucher = {
+          id: 'KOVA-' + Math.random().toString(36).substr(2, 6).toUpperCase(),
+          name: pendingPrize.fullTitle,
+          desc: pendingPrize.desc,
+          date: new Date().toLocaleDateString('vi-VN')
+        };
+        userVouchers.unshift(voucher);
+        saveState();
+        renderVouchers();
       }
-      if (tabName === 'staff') {
-        document.getElementById('tab-staff').classList.remove('hidden');
-        renderStaffHistory();
-        renderWeightsControls();
+      closeResultModal();
+      switchTab('vouchers');
+    }
+
+    // --- TAB SWITCHING ---
+    function switchTab(tab) {
+      const tabWheelBtn = document.getElementById('tab-wheel');
+      const tabVouchersBtn = document.getElementById('tab-vouchers');
+      const secWheel = document.getElementById('section-wheel');
+      const secVouchers = document.getElementById('section-vouchers');
+
+      if (tab === 'wheel') {
+        tabWheelBtn.className = "flex-1 py-2.5 px-4 rounded-xl font-medium text-sm transition-all duration-200 flex items-center justify-center space-x-2 bg-kova-green text-white shadow-sm";
+        tabVouchersBtn.className = "flex-1 py-2.5 px-4 rounded-xl font-medium text-sm transition-all duration-200 flex items-center justify-center space-x-2 text-stone-600 hover:text-kova-green";
+        secWheel.classList.remove('hidden');
+        secVouchers.classList.add('hidden');
+      } else {
+        tabVouchersBtn.className = "flex-1 py-2.5 px-4 rounded-xl font-medium text-sm transition-all duration-200 flex items-center justify-center space-x-2 bg-kova-green text-white shadow-sm";
+        tabWheelBtn.className = "flex-1 py-2.5 px-4 rounded-xl font-medium text-sm transition-all duration-200 flex items-center justify-center space-x-2 text-stone-600 hover:text-kova-green";
+        secWheel.classList.add('hidden');
+        secVouchers.classList.remove('hidden');
       }
     }
 
-    function renderVoucherList() {
-      const container = document.getElementById('voucherListContainer');
-      if (state.vouchers.length === 0) {
-        container.innerHTML = `
-          <div class="text-center py-10 bg-white rounded-2xl border border-dashed border-[#D2C3B0] text-gray-400">
-            <i data-lucide="ticket-x" class="w-10 h-10 mx-auto mb-2 text-[#D2C3B0]"></i>
-            <p class="text-xs">Bạn chưa có voucher nào. Hãy thử quay ngay!</p>
-          </div>
-        `;
-        lucide.createIcons();
+    // --- VOUCHER STORE RENDER ---
+    function renderVouchers() {
+      const container = document.getElementById('voucher-list');
+      const emptyState = document.getElementById('voucher-empty');
+      const badge = document.getElementById('voucher-count-badge');
+      const totalText = document.getElementById('voucher-total-text');
+
+      badge.textContent = userVouchers.length;
+      totalText.textContent = `${userVouchers.length} quà tặng`;
+
+      if (userVouchers.length === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
         return;
       }
 
-      container.innerHTML = state.vouchers.map((v, idx) => `
-        <div class="bg-[#FCFAF6] rounded-2xl p-4 border ${v.status === 'used' ? 'border-gray-200 opacity-60' : 'border-[#C59B27]/40 shadow-soft'} relative overflow-hidden">
-          <div class="flex items-start justify-between">
-            <div class="pr-2">
-              <span class="text-[10px] uppercase font-bold tracking-wider ${v.status === 'used' ? 'bg-gray-200 text-gray-600' : 'bg-[#5B2C52] text-white'} px-2 py-0.5 rounded-full">
-                ${v.status === 'used' ? 'Đã Đổi Quà' : 'Chưa Sử Dụng'}
-              </span>
-              <h4 class="font-bold text-sm text-[#5B2C52] mt-2">${v.prizeTitle}</h4>
-              <p class="text-[11px] text-gray-500 mt-0.5">Ngày nhận: ${v.createdAt}</p>
-            </div>
-            
-            <button onclick="openVoucherQR(${idx})" class="p-2 bg-white rounded-xl border border-gray-200 shadow-sm flex flex-col items-center hover:bg-gray-50">
-              <i data-lucide="qr-code" class="w-6 h-6 text-[#5B2C52]"></i>
-              <span class="text-[9px] font-mono text-[#5B2C52] font-bold mt-1">${v.token}</span>
-            </button>
+      emptyState.classList.add('hidden');
+      container.innerHTML = userVouchers.map((v) => `
+        <div class="bg-amber-50/60 border border-stone-200 rounded-2xl p-4 flex items-center justify-between shadow-sm hover:border-kova-gold transition-all">
+          <div class="space-y-1">
+            <span class="text-[10px] uppercase font-extrabold tracking-wider bg-amber-200/60 text-kova-green px-2 py-0.5 rounded-full">Voucher KŌVA</span>
+            <h4 class="font-bold text-stone-800 text-sm">${v.name}</h4>
+            <p class="text-xs text-stone-500">${v.desc}</p>
+            <p class="text-[10px] text-stone-400">Ngày nhận: ${v.date}</p>
           </div>
-
-          <div class="mt-3 pt-2 border-t border-dashed border-gray-200 text-[11px] text-[#4D6343] flex items-center gap-1">
-            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-            <span>${v.pairing.split('.')[0]}</span>
-          </div>
+          <button onclick="openQRModal('${v.id}', '${v.name}')" class="px-3.5 py-2 bg-kova-green text-amber-50 text-xs font-semibold rounded-xl hover:bg-kova-olive transition-all flex items-center space-x-1 shrink-0">
+            <i data-lucide="qr-code" class="w-3.5 h-3.5"></i>
+            <span>Dùng</span>
+          </button>
         </div>
       `).join('');
 
-      lucide.createIcons();
+      initLucide();
     }
 
-    function openVoucherQR(index) {
-      const voucher = state.vouchers[index];
-      if (voucher) showPrizeModal(voucher);
+    // --- QR CODE MODAL ---
+    function openQRModal(code, name) {
+      document.getElementById('qr-voucher-code').textContent = code;
+      document.getElementById('qr-voucher-name').textContent = name;
+      
+      const qrContainer = document.getElementById('qrcode-container');
+      qrContainer.innerHTML = '';
+
+      new QRCode(qrContainer, {
+        text: code,
+        width: 140,
+        height: 140,
+        colorDark: "#1E3A2B",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+
+      document.getElementById('modal-qr').classList.remove('hidden');
     }
 
-    function renderWeightsControls() {
-      const container = document.getElementById('weightsControlList');
-      const totalWeight = state.weights.reduce((sum, w) => sum + w, 0);
+    function closeQRModal() {
+      document.getElementById('modal-qr').classList.add('hidden');
+    }
 
-      container.innerHTML = PRIZES.map((prize, idx) => {
-        const currentW = state.weights[idx];
-        const percentage = totalWeight > 0 ? ((currentW / totalWeight) * 100).toFixed(1) : 0;
+    // --- STAFF PANEL CONTROL ---
+    document.getElementById('btn-staff-panel').addEventListener('click', openStaffModal);
 
+    function openStaffModal() {
+      const container = document.getElementById('staff-weights-container');
+      const totalWeight = PRIZES.reduce((sum, item) => sum + item.weight, 0);
+
+      container.innerHTML = PRIZES.map(p => {
+        const percentage = totalWeight > 0 ? ((p.weight / totalWeight) * 100).toFixed(1) : 0;
         return `
-          <div class="bg-white p-2.5 rounded-xl border border-gray-200">
-            <div class="flex justify-between items-center text-xs mb-1">
-              <span class="font-bold text-[#5B2C52]">Ô ${prize.id}: ${prize.shortText}</span>
-              <span class="font-bold text-[#4D6343] bg-[#F7F4EE] px-2 py-0.5 rounded text-[11px]">${percentage}% (~${currentW}pt)</span>
+          <div class="p-3 bg-stone-50 rounded-xl border border-stone-200 flex flex-col space-y-2">
+            <div class="flex justify-between items-center text-xs font-bold text-stone-700">
+              <span>${p.fullTitle}</span>
+              <span class="text-kova-rust"><span id="weight-perc-${p.id}">${percentage}</span>%</span>
             </div>
-            <input type="range" min="1" max="100" value="${currentW}" oninput="updateWeightVal(${idx}, this.value)" class="w-full accent-[#5B2C52] h-1.5 bg-gray-200 rounded-lg cursor-pointer">
+            <div class="flex items-center space-x-3">
+              <input type="range" min="0" max="100" value="${p.weight}" id="weight-input-${p.id}" oninput="updateWeightDisplay()" class="w-full accent-kova-green">
+              <span id="weight-val-${p.id}" class="text-xs font-mono w-8 text-right font-bold text-stone-600">${p.weight}</span>
+            </div>
           </div>
         `;
       }).join('');
+
+      document.getElementById('modal-staff').classList.remove('hidden');
     }
 
-    function updateWeightVal(index, val) {
-      state.weights[index] = parseInt(val, 10);
-      renderWeightsControls();
+    function updateWeightDisplay() {
+      let currentTotal = 0;
+      PRIZES.forEach(p => {
+        const input = document.getElementById(`weight-input-${p.id}`);
+        if (input) currentTotal += parseInt(input.value || 0, 10);
+      });
+
+      PRIZES.forEach(p => {
+        const input = document.getElementById(`weight-input-${p.id}`);
+        const valSpan = document.getElementById(`weight-val-${p.id}`);
+        const percSpan = document.getElementById(`weight-perc-${p.id}`);
+        if (input && valSpan && percSpan) {
+          const val = parseInt(input.value || 0, 10);
+          valSpan.textContent = val;
+          percSpan.textContent = currentTotal > 0 ? ((val / currentTotal) * 100).toFixed(1) : 0;
+        }
+      });
     }
 
-    function resetDefaultWeights() {
-      state.weights = PRIZES.map(p => p.weight);
+    function saveStaffWeights() {
+      PRIZES.forEach(p => {
+        const input = document.getElementById(`weight-input-${p.id}`);
+        if (input) {
+          p.weight = parseInt(input.value || 0, 10);
+        }
+      });
       saveState();
-      showCustomMessage("Đã khôi phục tỉ lệ mặc định!");
+      closeStaffModal();
+      alert("Đã cập nhật tỉ lệ trúng thưởng thành công!");
     }
 
-    function saveProbabilityWeights() {
-      saveState();
-      showCustomMessage("Đã lưu cấu hình tỉ lệ trúng thưởng thành công!");
+    function resetWeightsToDefault() {
+      const defaults = [30, 25, 15, 15, 10, 5];
+      PRIZES.forEach((p, idx) => {
+        p.weight = defaults[idx];
+      });
+      openStaffModal();
     }
 
-    function verifyCodeFromInput() {
-      const input = document.getElementById('staffInputCode');
-      const token = input.value.trim().toUpperCase();
-      if (!token) return;
+    function closeStaffModal() {
+      document.getElementById('modal-staff').classList.add('hidden');
+    }
 
-      const resultCard = document.getElementById('staffResultCard');
-      resultCard.classList.remove('hidden', 'bg-emerald-50', 'bg-rose-50', 'border-emerald-200', 'border-rose-200');
-
-      let voucher = state.vouchers.find(v => v.token === token);
-
-      if (!voucher) {
-        resultCard.classList.add('bg-rose-50', 'border-rose-200');
-        resultCard.innerHTML = `
-          <div class="flex items-start gap-2 text-rose-800">
-            <i data-lucide="alert-circle" class="w-5 h-5 flex-shrink-0 mt-0.5"></i>
-            <div>
-              <p class="font-bold text-xs">Mã Voucher Không Tồn Tại!</p>
-              <p class="text-[11px] mt-0.5">Vui lòng kiểm tra lại mã token hoặc thử lại.</p>
-            </div>
-          </div>
-        `;
-      } else if (voucher.status === 'used') {
-        resultCard.classList.add('bg-rose-50', 'border-rose-200');
-        resultCard.innerHTML = `
-          <div class="flex items-start gap-2 text-rose-800">
-            <i data-lucide="x-circle" class="w-5 h-5 flex-shrink-0 mt-0.5"></i>
-            <div>
-              <p class="font-bold text-xs">Mã QR Đã Được Sử Dụng Trước Đó!</p>
-              <p class="text-[11px] mt-0.5">Mã này chỉ có hiệu lực 1 lần và đã được nhân viên xác nhận.</p>
-            </div>
-          </div>
-        `;
+    // --- SOUND TOGGLE ---
+    document.getElementById('btn-sound').addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      const icon = document.getElementById('icon-sound');
+      if (soundEnabled) {
+        icon.setAttribute('data-lucide', 'volume-2');
       } else {
-        resultCard.classList.add('bg-emerald-50', 'border-emerald-200');
-        resultCard.innerHTML = `
-          <div class="text-emerald-900">
-            <div class="flex items-center gap-1.5 font-bold text-xs mb-1">
-              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i>
-              <span>VOUCHER HỢP LỆ (CHƯA DÙNG)</span>
-            </div>
-            <p class="text-sm font-bold text-[#5B2C52]">${voucher.prizeTitle}</p>
-            <p class="text-[11px] text-gray-600 mt-1">Mã Token: <strong class="font-mono text-black">${voucher.token}</strong></p>
-            
-            <button onclick="confirmRedeem('${voucher.token}')" class="mt-3 w-full py-2 bg-emerald-700 text-white font-bold rounded-xl text-xs hover:bg-emerald-800 transition-colors shadow-sm">
-              XÁC NHẬN ĐỔI QUÀ CHO KHÁCH
-            </button>
-          </div>
-        `;
+        icon.setAttribute('data-lucide', 'volume-x');
       }
-
-      lucide.createIcons();
-    }
-
-    function confirmRedeem(token) {
-      const voucher = state.vouchers.find(v => v.token === token);
-      if (voucher) {
-        voucher.status = 'used';
-        state.redeemedLog.unshift({
-          token: voucher.token,
-          prizeTitle: voucher.prizeTitle,
-          time: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })
-        });
-
-        saveState();
-
-        const resultCard = document.getElementById('staffResultCard');
-        resultCard.className = 'p-4 rounded-2xl border bg-emerald-100 border-emerald-300 text-emerald-900';
-        resultCard.innerHTML = `
-          <div class="text-center py-2">
-            <i data-lucide="party-popper" class="w-8 h-8 mx-auto text-emerald-600 mb-1"></i>
-            <p class="font-bold text-sm">ĐÃ XÁC NHẬN ĐỔI QUÀ THÀNH CÔNG!</p>
-            <p class="text-xs text-gray-600 mt-0.5">Mã ${token} hiện đã chuyển sang trạng thái "Đã sử dụng".</p>
-          </div>
-        `;
-        document.getElementById('staffInputCode').value = '';
-        lucide.createIcons();
-      }
-    }
-
-    function renderStaffHistory() {
-      const container = document.getElementById('staffHistoryList');
-      if (state.redeemedLog.length === 0) {
-        container.innerHTML = `<p class="text-gray-400 italic text-[11px]">Chưa có giao dịch đổi quà nào trong phiên này.</p>`;
-        return;
-      }
-
-      container.innerHTML = state.redeemedLog.slice(0, 5).map(log => `
-        <div class="bg-white p-2.5 rounded-xl border border-gray-200 flex items-center justify-between">
-          <div>
-            <p class="font-bold text-[#5B2C52] text-xs">${log.prizeTitle}</p>
-            <p class="text-[10px] text-gray-400 font-mono">Mã: ${log.token}</p>
-          </div>
-          <span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-1 rounded-md font-medium">${log.time}</span>
-        </div>
-      `).join('');
-    }
-
-    window.onload = function () {
-      createWheelDots();
-      drawWheel();
-      loadState();
-      lucide.createIcons();
-    };
+      initLucide();
+    });
   </script>
 </body>
 </html>
